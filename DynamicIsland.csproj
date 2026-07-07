@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
+    <RootNamespace>DynamicIsland</RootNamespace>
+    <AssemblyName>DynamicIsland</AssemblyName>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <!--
+      Plain WinForms desktop app. No WindowsAppSDK, no MSIX/Package.appxmanifest,
+      no Windows App Runtime dependency. `dotnet build` / `dotnet run` /
+      `dotnet publish` all just work — that's the whole point of this switch.
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Copied next to the exe so IslandForm can load the same icon at
+         runtime for the window/tray icon (ApplicationIcon above only sets
+         the exe's own Win32 resource icon, it isn't loadable as an Icon
+         object directly without this). -->
+    <None Include="Assets\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Velopack" Version="0.0.1053" />
+  </ItemGroup>
+
+</Project>
